@@ -1,6 +1,6 @@
 """Tests for md2wxr.wxr."""
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from xml.etree import ElementTree as ET
 
 from md2wxr.wxr import WXRPost, generate_wxr
@@ -12,7 +12,7 @@ NAMESPACES = {
     "dc": "http://purl.org/dc/elements/1.1/",
 }
 
-FIXED_DATE = datetime(2026, 5, 17, tzinfo=timezone.utc)
+FIXED_DATE = datetime(2026, 5, 17, tzinfo=UTC)
 
 
 def _make_post(**kwargs) -> WXRPost:

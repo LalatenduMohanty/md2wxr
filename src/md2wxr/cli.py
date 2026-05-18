@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import argparse
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from md2wxr import __version__
@@ -45,7 +45,7 @@ def _parse_date(date_str: str) -> datetime:
     """Parse a date string in YYYY-MM-DD format."""
     try:
         dt = datetime.strptime(date_str, "%Y-%m-%d")
-        return dt.replace(tzinfo=timezone.utc)
+        return dt.replace(tzinfo=UTC)
     except ValueError:
         print(
             f"Error: invalid date format '{date_str}', expected YYYY-MM-DD",

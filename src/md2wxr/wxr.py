@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from email.utils import format_datetime
 
 
@@ -25,7 +25,7 @@ class WXRPost:
 
     def __post_init__(self) -> None:
         if self.post_date is None:
-            self.post_date = datetime.now(timezone.utc)
+            self.post_date = datetime.now(UTC)
         if not self.slug:
             self.slug = _slugify(self.title)
         if not self.excerpt:
