@@ -27,57 +27,76 @@ class TestCLI:
 
     def test_custom_title(self, tmp_path):
         output = tmp_path / "out.xml"
-        main([
-            str(FIXTURES / "sample.md"),
-            "-o", str(output),
-            "--title", "Override Title",
-        ])
+        main(
+            [
+                str(FIXTURES / "sample.md"),
+                "-o",
+                str(output),
+                "--title",
+                "Override Title",
+            ]
+        )
         content = output.read_text()
         assert "Override Title" in content
 
     def test_custom_status(self, tmp_path):
         output = tmp_path / "out.xml"
-        main([
-            str(FIXTURES / "sample.md"),
-            "-o", str(output),
-            "--status", "publish",
-        ])
+        main(
+            [
+                str(FIXTURES / "sample.md"),
+                "-o",
+                str(output),
+                "--status",
+                "publish",
+            ]
+        )
         content = output.read_text()
         assert "<![CDATA[publish]]>" in content
 
     def test_custom_author(self, tmp_path):
         output = tmp_path / "out.xml"
-        main([
-            str(FIXTURES / "sample.md"),
-            "-o", str(output),
-            "--author", "janedoe",
-        ])
+        main(
+            [
+                str(FIXTURES / "sample.md"),
+                "-o",
+                str(output),
+                "--author",
+                "janedoe",
+            ]
+        )
         content = output.read_text()
         assert "janedoe" in content
 
     def test_custom_date(self, tmp_path):
         output = tmp_path / "out.xml"
-        main([
-            str(FIXTURES / "sample.md"),
-            "-o", str(output),
-            "--date", "2025-12-25",
-        ])
+        main(
+            [
+                str(FIXTURES / "sample.md"),
+                "-o",
+                str(output),
+                "--date",
+                "2025-12-25",
+            ]
+        )
         content = output.read_text()
         assert "2025-12-25 00:00:00" in content
 
     def test_missing_input_file(self, tmp_path):
         import pytest
+
         with pytest.raises(SystemExit):
             main([str(tmp_path / "nonexistent.md")])
 
     def test_output_is_valid_xml(self, tmp_path):
         from xml.etree import ElementTree as ET
+
         output = tmp_path / "out.xml"
         main([str(FIXTURES / "sample.md"), "-o", str(output)])
         ET.parse(str(output))
 
     def test_version(self, capsys):
         import pytest
+
         with pytest.raises(SystemExit) as exc_info:
             main(["--version"])
         assert exc_info.value.code == 0

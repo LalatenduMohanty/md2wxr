@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from email.utils import format_datetime
 
@@ -34,6 +34,7 @@ class WXRPost:
 
 def generate_wxr(post: WXRPost) -> str:
     """Generate a complete WXR 1.2 XML string for a single post."""
+    assert post.post_date is not None
     date_rfc2822 = format_datetime(post.post_date, usegmt=True)
     date_wp = post.post_date.strftime("%Y-%m-%d %H:%M:%S")
     date_created = post.post_date.strftime("%Y-%m-%d %H:%M")

@@ -21,10 +21,7 @@ def main(argv: list[str] | None = None) -> None:
         print(f"Error: {input_path} not found", file=sys.stderr)
         sys.exit(1)
 
-    if args.output:
-        output_path = Path(args.output)
-    else:
-        output_path = input_path.with_suffix(".xml")
+    output_path = Path(args.output) if args.output else input_path.with_suffix(".xml")
 
     parsed = parse_markdown_file(input_path)
 

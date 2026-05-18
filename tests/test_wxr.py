@@ -123,9 +123,7 @@ class TestExcerpt:
         assert "This is a paragraph." in post.excerpt
 
     def test_excerpt_strips_html(self):
-        post = _make_post(
-            content_html="<p><strong>Bold</strong> text</p>"
-        )
+        post = _make_post(content_html="<p><strong>Bold</strong> text</p>")
         assert "<strong>" not in post.excerpt
         assert "Bold text" in post.excerpt
 

@@ -41,5 +41,53 @@ Issues = "https://github.com/LalatenduMohanty/md2wxr/issues"
 [tool.hatch.build.targets.wheel]
 packages = ["src/md2wxr"]
 
+[dependency-groups]
+dev = [
+    "mypy>=1.10",
+    "pytest>=7.0",
+    "ruff>=0.4",
+    "types-Markdown>=3.6",
+]
+
+[tool.hatch.envs.dev]
+dependencies = [
+    "mypy>=1.10",
+    "pytest>=7.0",
+    "ruff>=0.4",
+    "types-Markdown>=3.6",
+]
+
+[tool.hatch.envs.dev.scripts]
+lint = "ruff check src/ tests/"
+format = "ruff format src/ tests/"
+format-check = "ruff format --check src/ tests/"
+typecheck = "mypy src/"
+test = "pytest {args}"
+check = ["lint", "format-check", "typecheck", "test"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "F",    # pyflakes
+    "W",    # pycodestyle warnings
+    "I",    # isort
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+]
+
+[tool.ruff.lint.per-file-ignores]
+"src/md2wxr/wxr.py" = ["E501"]  # XML template has long comment lines
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_configs = true

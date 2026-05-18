@@ -4,6 +4,10 @@ Convert Markdown files to WordPress WXR (WordPress eXtended RSS) export files.
 
 The output XML is accepted by both **WordPress.com** and **self-hosted WordPress** via Tools > Import > WordPress.
 
+## Why Markdown?
+
+Markdown is a natural format for drafting blog posts. You can write offline in any text editor, iterate quickly, and use AI agents to fix grammar, validate claims, and polish your drafts before publishing. When your post is ready, `md2wxr` converts it to WXR so you can import it directly into WordPress -- no copy-pasting or manual formatting required.
+
 ## Installation
 
 ```bash
